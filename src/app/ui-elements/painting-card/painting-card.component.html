@@ -1,0 +1,48 @@
+<div class="card-wrapper">
+    <div class="main-container" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
+        <div class="image-container" (click)="openImage(artwork.imageUrl)">
+            <img [src]="artwork.imageUrl" [alt]="artwork.title" class="image-container__image">
+        </div>
+        <div class="all-info-container-center">
+            <div class="all-info-container">
+                <div class="info-title">
+                    <h2 class="h2">{{ artwork.title }}</h2>
+                </div>
+                <div class="info-author">
+                    <h3 class="h3">{{ artwork.author }}</h3>
+                </div>
+                <div class="info-year">
+                    <p class="p">{{ artwork.year }} y.</p>
+                </div>
+                <div class="info-description">
+                    <p class="p">{{ artwork.description }}</p>
+                </div>
+                <div class="info-category-center">
+                    <div class="info-category">
+                        <ng-container *ngFor="let category of artwork.category">
+                            <h4 class="category-text h4" [style.borderColor]="getColor(category)" [style.background-color]="getColor(category)">
+                                {{ category }} 
+                            </h4>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="info-buttons-center">
+                    <button (click)="onRemove()" class="remove-button h4">Remove</button>
+                    <button (click)="editArtwork(artwork)" class="edit-button h4">Edit</button>
+                    <div class="communication-favourite" (click)="toggleFavourite(artwork)" [style.background-color]="artwork.isFavorite ? '#f0c400': 'var(--background-color)'">
+                        <img [src]="getFavouriteIcon(artwork.isFavorite)" alt="favourite">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal-overlay" (click)="closeImage()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedImage" alt="Fullscreen Image" class="fullscreen-image">
+      <button class="close-button" (click)="closeImage()">
+        <span class="arrow-left"></span>
+      </button>
+    </div>
+</div>

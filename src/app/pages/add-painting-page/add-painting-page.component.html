@@ -1,0 +1,67 @@
+<header class="header-container">
+    <div class="title-container">
+      <div class="title">
+        <img [src]="isDarkTheme ? '/assets/img/title-icon_white.png' : '/assets/img/title-icon.png'" alt="title-icon">
+        <h2 class="title-text h2">Artworks</h2>
+        <h2 class="title-text2 h2">Gallery</h2>
+      </div>
+    </div>
+    <div class="left-container">
+      <div class="theam-change">
+        <img [src]="isDarkTheme ? 'assets/img/theam_on.png' : 'assets/img/theam_off.png'" alt="theam" (click)="toggleTheme()" class="theam-icon">
+      </div>
+      <button class="addpainting-button" (click)="goToAddPainting()">Add Painting</button>
+    </div>
+</header>
+<div class="form-container">
+    <form (ngSubmit)="onSubmit()" #artworkForm="ngForm">
+        <button (click)="goBack()" class="back-button">Back</button>
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" [(ngModel)]="artwork.title" required>
+        </div>
+    
+        <div>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" [(ngModel)]="artwork.author" required>
+        </div>
+    
+        <div>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" [(ngModel)]="artwork.year" required>
+        </div>
+    
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" [(ngModel)]="artwork.description"></textarea>
+        </div>
+    
+        <div>
+            <label>Categories:</label>
+            <div class="categories-container">
+                <span *ngFor="let category of categories"
+                      (click)="toggleCategory(category)"
+                      [class.selected]="isCategorySelected(category)">
+                    {{ category.name }}
+                </span>
+            </div>
+        </div>
+    
+        <div class="image-upload-wrapper">
+            <label for="image">Upload Image:</label>
+            <div class="custom-file-upload">
+                <input type="file" id="image" (change)="onImageSelected($event)" accept=".png, .jpg, .jpeg" required>
+                <span class="file-upload-text">{{ selectedImageName || 'Choose an image' }}</span>
+            </div>
+
+            <div class="image-preview" *ngIf="artwork.imageUrl">
+                <img [src]="artwork.imageUrl" alt="Image Preview">
+            </div>
+        </div>
+    
+        <button type="submit" [disabled]="!artworkForm.form.valid">Submit</button>
+    </form>
+</div>
+<footer class="footer">
+    <app-footer></app-footer>
+</footer>

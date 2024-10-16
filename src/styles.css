@@ -1,1 +1,163 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.light-theme {
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --header-background: #ffffff;
+    --card-background: #ffffff;
+    --button-border: #716da6;
+    --button-text: #333333;
+    --button-background: #9793c6;
+    --title: #716da6;
+    --title2: #333333;
+    --circle-color:  #fff;
+    --text-categories: #EDEDED;
+    --header-line: #d3d3d3;
+}
+  
+.dark-theme {
+    --background-color: #1b1b1b;
+    --text-color: #EDEDED;
+    --header-background: #1e1e1e;
+    --card-background: #1e1e1e;
+    --button-border: #716da6;
+    --button-text: #ffffff;
+    --button-background: #9793c6;
+    --title: #716da6;
+    --title2: #ffffff;
+    --circle-color:  #1e1e1e;
+    --text-categories: #333333;
+    --header-line: #353535;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    cursor: none;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color:  var(--circle-color, #fff); 
+    border-radius: 50%;
+    transform: translateX(-50%);
+    transition: all 0.8s ease;
+    z-index: 10; 
+    pointer-events: none; 
+}
+
+body.light-theme.animating::before {
+    width: 200vw; 
+    height: 200vw;
+    top: -100%;
+}
+
+body.dark-theme.animating::before {
+    width: 200vw;
+    height: 200vw;
+    top: -100%;
+}
+
+body.light-theme, body.dark-theme {
+    background-color: var(--background-color); 
+}
+
+body:not(.animating)::before {
+    width: 0;
+    height: 0;
+    top: -100%; 
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle, 
+        rgba(113, 109, 166, 0.9) 20%,  
+        rgba(113, 109, 166, 0.5) 90%
+    );
+    box-shadow: 0 0 40px rgba(113, 109, 166, 1);
+    pointer-events: none;
+    z-index: 10000; 
+    transform: translate(-50%, -50%); 
+    will-change: transform; 
+    transition: transform 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out;
+}
+
+.custom-cursor.is-hovering {
+    width: 60px; 
+    height: 60px;
+  }
+  
+.custom-cursor.delayed {
+    transition: left 0.1s ease, top 0.1s ease; 
+}
+
+::selection {
+    background-color: var(--button-background); 
+    color: #fff; 
+}
+
+.grey-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.h2{
+    font-weight: 700;
+    cursor: none;
+}
+
+.h3{
+    font-weight: 600;
+    cursor: none;
+}
+
+.h4{
+    font-weight: 500;
+    cursor: none;
+}
+
+.p{
+    font-weight: 400;
+    cursor: none;
+}
+
+a{
+    cursor: none;
+}
+
+button{
+    cursor: none;
+}
+
+input{
+    cursor: none;
+}

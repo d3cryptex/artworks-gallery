@@ -1,0 +1,64 @@
+<header class="header-container">
+    <div class="title-container">
+      <div class="title">
+        <img [src]="isDarkTheme ? '/assets/img/title-icon_white.png' : '/assets/img/title-icon.png'" alt="title-icon">
+        <h2 class="title-text h2">Artworks</h2>
+        <h2 class="title-text2 h2">Gallery</h2>
+      </div>
+    </div>
+    <div class="left-container">
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <input type="text" class="search-input" [(ngModel)]="searchText" placeholder="Search..."
+            (focus)="showCategoryList()" 
+            (blur)="hideCategoryList()"
+            (input)="filterArtworks()" />
+          <img src="assets/img/search.png" alt="search" class="search-icon">
+          <div class="category-list" [class.show]="isCategoryListVisible">
+            <div *ngFor="let category of categories" class="category-item" 
+                 [class.selected]="selectedCategories.includes(category.name)" 
+                 (click)="toggleCategorySelection(category.name)">
+              {{ category.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theam-change">
+        <img [src]="isDarkTheme ? 'assets/img/theam_on.png' : 'assets/img/theam_off.png'" alt="theam" (click)="toggleTheme()" class="theam-icon">
+      </div>
+      <button class="addpainting-button" (click)="goToAddPainting()">Add Painting</button>
+    </div>
+</header>
+<div class="tabs-container">
+  <button class="tab-button" [class.active]="currentTab === 'gallery'" (click)="setTab('gallery')">Gallery</button>
+  <button class="tab-button" [class.active]="currentTab === 'favorites'" (click)="setTab('favorites')">Favourites</button>
+</div>
+<div class="page-main-cards">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <ng-container *ngIf="currentTab === 'gallery'">
+    <ng-container *ngFor="let artwork of filteredArtworks; trackBy: trackById">
+      <app-painting-card [artwork]="artwork"></app-painting-card>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="currentTab === 'favorites'">
+    <ng-container *ngIf="isEmpty(); else showArtworks">
+      <div class="empty-container">
+        <h1 class="empty-title h4">Empty</h1>
+      </div>
+    </ng-container>
+
+    <ng-template #showArtworks>
+      <ng-container *ngFor="let artwork of favoriteArtworks; trackBy: trackById">
+        <app-painting-card [artwork]="artwork"></app-painting-card>
+      </ng-container>
+    </ng-template>
+  </ng-container>
+</div>
+<footer class="footer">
+  <app-footer></app-footer>
+</footer>
+
