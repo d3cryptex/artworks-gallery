@@ -13,7 +13,7 @@
             (focus)="showCategoryList()" 
             (blur)="hideCategoryList()"
             (input)="filterArtworks()" />
-          <img src="assets/img/search.png" alt="search" class="search-icon">
+          <img [src]="isDarkTheme ? 'assets/img/search_white.png' : 'assets/img/search.png'" alt="search" class="search-icon">
           <div class="category-list" [class.show]="isCategoryListVisible">
             <div *ngFor="let category of categories" class="category-item" 
                  [class.selected]="selectedCategories.includes(category.name)" 
