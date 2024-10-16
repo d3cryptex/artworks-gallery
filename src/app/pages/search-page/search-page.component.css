@@ -228,11 +228,12 @@
 .page-main-cards{
     display: flex;
     flex-wrap: wrap; 
-    justify-content: space-between; /* Карточки будут распределяться с равными отступами */
+    flex-direction: row; 
+    justify-content: flex-start; 
     gap: 20px;
     margin-top: 10px;
-    padding: 20px; /* Отступы от краёв страницы */
-    max-width: 1200px;
+    padding: 20px; 
+    min-height: 100vh; 
 }
 
 .footer {
