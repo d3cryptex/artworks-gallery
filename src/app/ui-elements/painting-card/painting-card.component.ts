@@ -99,9 +99,9 @@ export class PaintingCardComponent {
 
   getFavouriteIcon(isFavorite: boolean): string {
     if (this.isTheme) {
-      return isFavorite ? '/assets/img/fav_white_active.png' : '/assets/img/fav_white.png';
+      return isFavorite ? 'assets/img/fav_white_active.png' : 'assets/img/fav_white.png';
     } else {
-      return isFavorite ? '/assets/img/fav_active.png' : '/assets/img/fav.png';
+      return isFavorite ? 'assets/img/fav_active.png' : 'assets/img/fav.png';
     }
   }
 
